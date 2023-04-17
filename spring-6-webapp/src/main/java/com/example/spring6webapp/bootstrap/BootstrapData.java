@@ -30,6 +30,7 @@ public class BootstrapData implements CommandLineRunner {
         var ddd = Book.builder()
                 .title("Domain Driven Design")
                 .isbn("12345")
+                .authors(new HashSet<>())
                 .build();
 
         var rod = Author.builder()
@@ -41,6 +42,7 @@ public class BootstrapData implements CommandLineRunner {
         var noEJB = Book.builder()
                 .title("J2EE Development without EJB")
                 .isbn("2345")
+                .authors(new HashSet<>())
                 .build();
 
         eric = authorRepository.save(eric);
@@ -51,6 +53,8 @@ public class BootstrapData implements CommandLineRunner {
 
         eric.getBooks().add(ddd);
         rod.getBooks().add(noEJB);
+        ddd.getAuthors().add(eric);
+        noEJB.getAuthors().add(rod);
 
         authorRepository.save(eric);
         authorRepository.save(rod);
